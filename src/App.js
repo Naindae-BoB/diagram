@@ -12,13 +12,18 @@ function initDiagram() {
       {
         'undoManager.isEnabled': true,
         'resizingTool.isEnabled': true,
-        model: new go.GraphLinksModel({ linkKeyProperty: 'key' }),
-        "linkingTool.isEnabled": true, // enable linking tool
+         model: new go.GraphLinksModel({ linkKeyProperty: 'key' }),
+        "linkingTool.isEnabled": true, 
         "clickCreatingTool.archetypeNodeData": { text: 'new node', color: 'lightblue' },
-      });
+      });               
+
+  diagram.addLayerBefore($(go.Layer, { name: "BottomLayer" }), diagram.findLayer("Background"));
 
   diagram.nodeTemplate =
     $(go.Node, "Auto",
+    new go.Binding("layerName", "key", function(key) {
+      return key === -5 ? "BottomLayer" : "";  // key가 -5인 노드를 "BottomLayer" 레이어에 추가
+    }),
       { resizable: true, resizeObjectName: "SHAPE" },
       new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
       $(go.Shape, 
@@ -73,7 +78,8 @@ function App() {
     { key: -1, text: "Start", figure: "Circle", color: "lightblue" },
     { key: -2, text: "Step", figure: "Rectangle", color: "lightblue" },
     { key: -3, text: "???", figure:"Diamond", color:"lightblue"},
-    { key:-4,text:"End",figure:"Circle",color:"lightblue"}
+    { key:-4,text:"End",figure:"Circle",color:"lightblue"},
+    { key:-5,text:"Group",figure:"Rectangle",color:"lightblue", fill:null}
   ]
   return (
     <div className="App" style={{ display:'flex', flexDirection:'row' }}>

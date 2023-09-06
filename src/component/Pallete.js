@@ -10,7 +10,6 @@ function Pallete({ nodeDataArray }) {
     let myPalette =
       $(go.Palette,
         {
-          // enable Ctrl+Z to undo and Ctrl+Y to redo
           "undoManager.isEnabled": true,
           model: new go.GraphLinksModel(nodeDataArray),
         });
