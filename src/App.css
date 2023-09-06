@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.diagram-component {
+  height: 80vh; /* Viewport Height */
+  width: 80vw; /* Viewport Width */
+  border: solid 1px black;
+  background-color: white;
+}
+
+.palette-component {
+  position:absolute; 
+  left :0px; 
+}
